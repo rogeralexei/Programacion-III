@@ -194,6 +194,7 @@ if __name__=="__main__":
                     break
             
         elif opc==6:
+            TODO: #Mostrar Estdisticas por tipo de sangre
             choose=int(input("Con gusto te mostramos las estadisticas. Elige las estadisticas que necesitas visualizar.\n1.Donantes\n2.Donatario\n"))
             #Estadisticas Donantes
             if choose==1:
