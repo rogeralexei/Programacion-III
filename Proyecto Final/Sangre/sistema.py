@@ -24,6 +24,9 @@ class Donante():
 
 class Donatario(Donante):
 
+    def __init__(self,name,age,b_type,sex):
+        super().__init__(name,age,b_type,sex)
+
     def posible(self):
         if self.b_type=="A+":
             sangre_permitida=["A+","A-","O+","O-"]
