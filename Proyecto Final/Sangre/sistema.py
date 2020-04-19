@@ -7,7 +7,7 @@ de donarle a alguno de los usuarios quwe necesitan donacion. Para eso se realiza
 '''
 
 from collections import defaultdict 
-import pdb
+# import pdb
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import matplotlib.pyplot as plt
@@ -61,6 +61,8 @@ if __name__=="__main__":
     donatarios=[]
     sexoDonante=defaultdict(lambda:0)
     sexoDonatario=defaultdict(lambda:0)
+    sangreDonante=defaultdict(lambda: 0)
+    sangreDonatario=defaultdict(lambda: 0)
     
     while True:
         
@@ -89,11 +91,22 @@ if __name__=="__main__":
         
         elif opc==2:
             cont=1
+            print(f"Excelente, crearemos un nuevo donatario de sangre. Actualmente hay {len(donatarios)} donatarios de Sangre.")
             while cont==1:
-                print(f"Excelente, crearemos un nuevo donatario de sangre. Actualmente hay {len(donatarios)} donatarios de Sangre.")
                 name=input("Ingrese el nombre del donatario: ")
-                age=input("Ingrese la edad del donatario: ")
+                try:
+                    age=int(input("Ingrese la edad del donatario: "))
+                except:
+                    print("El valor introducido no es una edad. Comenzaremos nuevamente.")
+                    break
+                else:
+                    if age<15:
+                        print("Esta Persona es muy joven, no puede donar. Intentar añadir a otra persona.")
+                        break
                 b_type=input("Ingrese el tipo de sangre del donatario: ")
+                if b_type.upper() not in ["A+","B+","O+","AB+","A-","B-","O-","AB-"]:
+                    print("Sangre Invalida. Intente Nuevamente.")
+                    break
                 sex=input("Ingrese el sexo del donatario: ")
                 sexoDonatario[sex]+=1
                 try:
@@ -110,11 +123,10 @@ if __name__=="__main__":
         
         elif opc==3:
             if len(donantes)>=1:
-                sangre=defaultdict(lambda: 0)
                 print("Los donantes disponibles son: ")
                 for donante in donantes:
                     print(f"\n{donante.name} con sangre tipo {donante.b_type}")
-                    sangre[donante.b_type]+=1
+                    sangreDonante[donante.b_type]+=1
                 print("\n"+("x"*20))
                 for k,v in sangre.items():
                     print(f"\nDe tipo de sangre {k} hay {v} personas.")
@@ -126,11 +138,10 @@ if __name__=="__main__":
         
         elif opc==4:
             if len(donatarios)>=1:
-                sangre=defaultdict(lambda: 0)
                 print("Los donatarios disponibles son: ")
                 for donatario in donatarios:
                     print(f"\n{donatario.name} con sangre tipo {donatario.b_type}")
-                    sangre[donatario.b_type]+=1
+                    sangreDonatario[donatario.b_type]+=1
                 print("\n"+("x"*20))
                 for k,v in sangre.items():
                     print(f"\nDe tipo de sangre {k} hay {v} personas.")
@@ -194,7 +205,6 @@ if __name__=="__main__":
                     break
             
         elif opc==6:
-            TODO: #Mostrar Estdisticas por tipo de sangre
             choose=int(input("Con gusto te mostramos las estadisticas. Elige las estadisticas que necesitas visualizar.\n1.Donantes\n2.Donatario\n"))
             #Estadisticas Donantes
             if choose==1:
