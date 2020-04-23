@@ -1,54 +1,30 @@
 '''
-Sistema de Sangre.
-By Roger Urrutia, Hernan Dominguez +Agregar el nombre del resto de los Integrantes
 
-Concepto general, crear un sistema de donacion de sangre en la cual el donante de su informacion y se pueda ver si este es capaz 
-de donarle a alguno de los usuarios quwe necesitan donacion. Para eso se realiza una evaluacion de los tipos de sangre que este puede aceptar.
+Sistema de Sangre.
+
+By 
+Roger Urrutia 
+Jose L. Gonzalez M.
+Ricardo Tejera
+Leidys Tello
+Himani Budhrani
+Uliano Paz
+Diego Martinez
+Hernan Dominguez
+
+
+
+Concepto General, 
+crear un sistema de donación de sangre en la cual el donante brinde su información y se pueda ver si este es capaz 
+de donarle a alguna de las personas que necesitan donación. Para esto se realiza una evaluación de los tipos de sangre que este puede aceptar.
+
 '''
 
 from collections import defaultdict 
+
+import termcolor
 # importando las funciones...-Adrien
-from funciones import estadisticas_donantes_donatarios,nuevo_donante_donatario,lista_donante_donatario
-#Clases
-class Donante():
-
-    def __init__(self,name,age,b_type,sex):
-        self.name=name
-        self.age=age
-        self.b_type=b_type
-        self.sex=sex
-
-
-class Donatario(Donante):
-
-    def __init__(self,name,age,b_type,sex):
-        super().__init__(name,age,b_type,sex)
-
-    def posible(self):
-        if self.b_type=="A+":
-            sangre_permitida=["A+","A-","O+","O-"]
-        elif self.b_type=="O+":
-            sangre_permitida=["O+","O-"]
-        elif self.b_type=="B+":
-            sangre_permitida=["B+","B-","O+","O-"]
-        elif self.b_type=="AB+":
-            sangre_permitida=["A+","A-","B+","B-","O+","O-","AB+","AB-"]
-        elif self.b_type=="A-":
-            sangre_permitida=["A-","O-"]
-        elif self.b_type=="O-":
-            sangre_permitida=["O-"]
-        elif self.b_type=="B-":
-            sangre_permitida=["B-","O-"]
-        elif self.b_type=="AB-":
-            sangre_permitida=["A-","B-","O-","AB-"]
-        else:
-            return f"La Sangre {self.b_type} no existe."
-        return sangre_permitida
-
-def menu():
-    print("\nElige la accion que deseas realizar.\n1.Añadir Donante de Sangre\n2.Añadir Donatario de Sangre\n3.Revisar lista de Donantes\n4.Revisar Lista de Donatarios\n5.Realizar una transfusion\n6.Estadisticas\n7.Salir")
-    opc=int(input("Seleccionar: "))
-    return opc
+import funciones as fn
 
 if __name__=="__main__":
     
@@ -62,37 +38,40 @@ if __name__=="__main__":
     
     while True:
 
-        print('Bienvenido a el sistema de Donacion de Sangre.' )
-        opc=menu()
+        opc=fn.menu()
         
         if opc==1:
-            nuevo_donante_donatario(1,donantes,'donante',sexoDonante,sangreDonante)
+            fn.nuevo_donante_donatario(1,donantes,'donante',sexoDonante,sangreDonante)
         
         elif opc==2:
             
-            nuevo_donante_donatario(1,donatarios,'donatario',sexoDonatario,sangreDonatario)
+            fn.nuevo_donante_donatario(1,donatarios,'donatario',sexoDonatario,sangreDonatario)
 
         
         elif opc==3:
            
-            lista_donante_donatario(donantes,'donante',sangreDonante)
+            fn.lista_donante_donatario(donantes,'donante',sangreDonante)
 
         elif opc==4:
             
-            lista_donante_donatario(donatarios,'donatarios',sangreDonatario)
+            fn.lista_donante_donatario(donatarios,'donatarios',sangreDonatario)
 
         elif opc==5:
             
             print("\nSe realizara una transfusion. Es importante que los pacientes se encuentren en la base de datos.")
             
             while True:
-                paciente_1=input("\nIngrese el nombre del donante o escriba q para salir: ")
+                nombre=input("\nIngrese el nombre del donante o escriba q para salir: ")
+                apellido=input("\nIngrese el apellido del donante o escriba q para salir: ")
+                paciente_1=""
+                paciente_2=""
                 
-                if paciente_1.lower()=="q":
+                if nombre.lower()=="q" or apellido.lower()=="q":
                     break
 
+
                 for donante in donantes:
-                    if donante.name==paciente_1:
+                    if (donante.name+donante.apellido).lower()==(nombre+apellido).lower():
                         print("Donante encontrado.")
                         paciente_1=donante
                     else:
@@ -102,15 +81,18 @@ if __name__=="__main__":
                     print("\nError")
                     break
 
-                paciente_2=input("\nIngrese el nombre del donatario o escriba q para salir: ")
+                nombre_2=input("\nIngrese el nombre del donatario o escriba q para salir: ")
+                apellido_2=input("\nIngrese el apellido del donatario o escriba q para salir: ")
                 
-                if paciente_2.lower()=="q":
+                if nombre_2.lower()=="q" or apellido_2.lower()=="q":
                     break
 
                 for donatario in donatarios:
-                    if donatario.name==paciente_2:
+                    if (donatario.name+donatario.apellido).lower()==(nombre_2+apellido_2).lower():
                         print("Donatario encontrado.")
                         paciente_2=donatario
+                        sangreDonatario[paciente_2.b_type]-=1
+                        sexoDonatario[paciente_2.sex]-=1
                     else:
                         continue
                 
@@ -123,15 +105,15 @@ if __name__=="__main__":
                         articulo="La"
                     else:
                         articulo="El"
-                    print(f"{articulo} donante {paciente_1.name} puede donarle sin problemas a {paciente_2.name}")
+                    print(f"\n{articulo} donante {paciente_1.name} puede donarle sin problemas a {paciente_2.name}")
                     index=donatarios.index(paciente_2)
                     delete=donatarios.pop(index)
                     print(f"{delete.name} ha sido removido de la lista de donatarios!")
                 else:
-                    print(f"Este donante {paciente_1.name} no puede donarle a {paciente_2.name}")
+                    print(f"\nEste donante {paciente_1.name} no puede donarle a {paciente_2.name}")
                     break
                 
-                continuar=input("Deseas continuar?(si/no): ")
+                continuar=input("Deseas realizar otra transfusion?(si/no): ")
                 if continuar.lower()=="si":
                     continue
                 else:
@@ -142,22 +124,18 @@ if __name__=="__main__":
             
             if choose==1:
 
-                estadisticas_donantes_donatarios(donantes,sexoDonatario,sangreDonatario)
+                fn.estadisticas_donantes_donatarios(donantes,sexoDonante,sangreDonante,"donante")
 
             elif choose==2:
             #Estadisticas Donatarios
-                estadisticas_donantes_donatarios(donatarios,sexoDonatario,sangreDonatario)
+                fn.estadisticas_donantes_donatarios(donatarios,sexoDonatario,sangreDonatario,"donatario")
         
         elif opc==7:
-            print("\nGracias por utilizar la aplicacion.")
+            print(termcolor.colored("\nGracias por utilizar la aplicacion. 🚀","red"))
             break
         
         else:
             print("\n Opcion no valida.")
-
-
-                
-
 
 
 

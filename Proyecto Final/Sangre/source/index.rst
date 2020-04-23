@@ -5,16 +5,17 @@
 
 Bienvenido a la documentacion del Banco de Sangre
 ===================================================
+.. automodule:: sistema
+   :members:
+
+.. automodule:: funciones
+   :members:
+
+.. automodule:: classes
+   :members:
+
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Tabla de Contenidos
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

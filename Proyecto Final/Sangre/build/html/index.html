@@ -26,11 +26,11 @@
 
     <body>
         <div class="ribbon">
-            <a href="https://github.com/rogeralexei">Por Roger Urrutia</a>
+            <a href="https://github.com/bernardphp/bernard">Fork me on GitHub!</a>
         </div>
 
         <div class="container text-center">
-            <a class="logo" href="http://bernardphp.com">Sistema de Sangre</a>
+            <a class="logo" href="http://bernardphp.com">Bernard</a>
         </div>
 
         <hr />
@@ -43,7 +43,6 @@
                     
                         <ul>
 <li><a class="reference internal" href="#">Bienvenido a la documentacion del Banco de Sangre</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
                     
@@ -58,18 +57,77 @@
 
                 <div class="col-md-9 body">
                     
-  <div class="section" id="bienvenido-a-la-documentacion-del-banco-de-sangre">
-<h1>Bienvenido a la documentacion del Banco de Sangre<a class="headerlink" href="#bienvenido-a-la-documentacion-del-banco-de-sangre" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-sistema">
+<span id="bienvenido-a-la-documentacion-del-banco-de-sangre"></span><h1>Bienvenido a la documentacion del Banco de Sangre<a class="headerlink" href="#module-sistema" title="Permalink to this headline">¶</a></h1>
+<p>Sistema de Sangre.</p>
+<p>By 
+Roger Urrutia 
+Jose L. Gonzalez M.
+Ricardo Tejera
+Leidys Tello
+Himani Budhrani
+Uliano Paz
+Diego Martinez
+Hernan Dominguez</p>
+<p>Concepto General, 
+crear un sistema de donación de sangre en la cual el donante brinde su información y se pueda ver si este es capaz 
+de donarle a alguna de las personas que necesitan donación. Para esto se realiza una evaluación de los tipos de sangre que este puede aceptar.</p>
+<span class="target" id="module-funciones"></span><dl class="py function">
+<dt id="funciones.estadisticas_donantes_donatarios">
+<code class="sig-prename descclassname">funciones.</code><code class="sig-name descname">estadisticas_donantes_donatarios</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lista</span></em>, <em class="sig-param"><span class="n">sexodict</span></em>, <em class="sig-param"><span class="n">sangredict</span></em>, <em class="sig-param"><span class="n">tipo</span></em><span class="sig-paren">)</span><a class="headerlink" href="#funciones.estadisticas_donantes_donatarios" title="Permalink to this definition">¶</a></dt>
+<dd><p>Toma el rango de la Lista de los donantes se agregan axis de objects/ performance</p>
+<p>se genera una gráfica mostrandado la data activa de los donantes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="funciones.lista_donante_donatario">
+<code class="sig-prename descclassname">funciones.</code><code class="sig-name descname">lista_donante_donatario</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lista</span></em>, <em class="sig-param"><span class="n">donante_donatario</span></em>, <em class="sig-param"><span class="n">sangredict</span></em><span class="sig-paren">)</span><a class="headerlink" href="#funciones.lista_donante_donatario" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abre la lista de donates o donatarios y contabiliza</p>
+<p>toma el rango de los donates disponibles por cantidad</p>
+<p>retorna por nombre/tipo de sangre tambien la cantida especifica de un tipo de sangre con su data</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="funciones.menu">
+<code class="sig-prename descclassname">funciones.</code><code class="sig-name descname">menu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#funciones.menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manda el Menú</p>
+<p>Opciones:</p>
+<blockquote>
+<div><p>1: Añadir a un donante</p>
+<p>2: Añadir a un donatario</p>
+<p>3: Revisar la lista de donantes</p>
+<p>4: Revisar la lista de donatarios</p>
+<p>5: Realizar una transfusión</p>
+<p>6: Estadisticas</p>
+<p>7: Salir</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>opc(num):Opcion del menu</p>
+</div></blockquote>
+</dd></dl>
+
+<span class="target" id="module-classes"></span><dl class="py class">
+<dt id="classes.Donante">
+<em class="property">class </em><code class="sig-prename descclassname">classes.</code><code class="sig-name descname">Donante</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">apellido</span></em>, <em class="sig-param"><span class="n">age</span></em>, <em class="sig-param"><span class="n">b_type</span></em>, <em class="sig-param"><span class="n">sex</span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.Donante" title="Permalink to this definition">¶</a></dt>
+<dd><p>Es la clase utilizada para definir a los donantes</p>
+<p>Parameters:</p>
+<blockquote>
+<div><p>name(str): Nombre del donante</p>
+<p>age(num): Edad del donante</p>
+<p>b_type(str): Tipo de sangre del donante</p>
+<p>sex(str): Sexo del paciente (no en cantidad, sino su genero, Masculino o Femenino)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py class">
+<dt id="classes.Donatario">
+<em class="property">class </em><code class="sig-prename descclassname">classes.</code><code class="sig-name descname">Donatario</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">apellido</span></em>, <em class="sig-param"><span class="n">age</span></em>, <em class="sig-param"><span class="n">b_type</span></em>, <em class="sig-param"><span class="n">sex</span></em><span class="sig-paren">)</span><a class="headerlink" href="#classes.Donatario" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a un donatario de sangre en la base de datos</p>
+</dd></dl>
+
 <div class="toctree-wrapper compound">
 </div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
 </div>
 
 
